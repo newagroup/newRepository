@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站链接图片类型管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑网站链接图片类型</h2>
+	<div class="c">
+    	<form id="eduWebsiteImagesTypeForm" method="post">
+		
+		<input type="hidden" id="TYPEID" name="TYPEID" value="${ eduWebsiteImagesType.TYPEID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">类型ID:</td>
+				<td><input  id="typeId"  name="typeId"  value="${ eduWebsiteImagesType.typeId }" type="text"  ></td>
+			
+				<td class="ftit">类型名:</td>
+				<td><input  id="typeName"  name="typeName"  value="${ eduWebsiteImagesType.typeName }" type="text"  ></td>
+			</tr>
+			<tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

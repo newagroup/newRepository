@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduWebsiteCourseDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduWebsiteCourse" >
+    	<result column="id" property="id"/>
+    	<result column="name" property="name"/>
+    	<result column="link" property="link"/>
+    	<result column="description" property="description"/>
+    	<result column="coursenum" property="coursenum"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,name,link,description,coursenum
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="name != null and name != ''" >
+	    and name = #{name}
+	</if>
+	<if test="link != null and link != ''" >
+	    and link = #{link}
+	</if>
+	<if test="description != null and description != ''" >
+	    and description = #{description}
+	</if>
+	<if test="coursenum != null" >
+	    and coursenum = #{coursenum}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduWebsiteCourse" >
+  insert into edu_website_course(id,name,link,description,coursenum)
+ values(#{id},#{name},#{link},#{description},#{coursenum})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduWebsiteCourse" >
+  update edu_website_course set id=#{id},name=#{name},link=#{link},description=#{description}coursenum=#{coursenum} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduWebsiteCourse" >
+	update edu_website_course set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  and name != '' ">
+		name=#{name},
+	</if>
+	<if test="link != null  and link != '' ">
+		link=#{link},
+	</if>
+	<if test="description != null  and description != '' ">
+		description=#{description},
+	</if>
+	<if test="coursenum != null  ">
+		coursenum=#{coursenum},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_website_course where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 课程网站链接 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_website_course  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_course 
+</select>
+
+<!-- 课程网站链接 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduWebsiteCourse">
+	select count(1) from edu_website_course 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询课程网站链接列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduWebsiteCourse">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_course 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

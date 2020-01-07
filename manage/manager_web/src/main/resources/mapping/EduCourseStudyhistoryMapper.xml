@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduCourseStudyhistoryDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduCourseStudyhistory" >
+    	<result column="id" property="id"/>
+    	<result column="user_id" property="userId"/>
+    	<result column="course_id" property="courseId"/>
+    	<result column="kpoint_id" property="kpointId"/>
+    	<result column="playercount" property="playercount"/>
+    	<result column="course_name" property="courseName"/>
+    	<result column="kpoint_name" property="kpointName"/>
+    	<result column="databack" property="databack"/>
+    	<result column="update_time" property="updateTime"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,user_id,course_id,kpoint_id,playercount,course_name,kpoint_name,databack,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="courseId != null" >
+	    and course_id = #{courseId}
+	</if>
+	<if test="kpointId != null" >
+	    and kpoint_id = #{kpointId}
+	</if>
+	<if test="playercount != null" >
+	    and playercount = #{playercount}
+	</if>
+	<if test="courseName != null and courseName != ''" >
+	    and course_name = #{courseName}
+	</if>
+	<if test="kpointName != null and kpointName != ''" >
+	    and kpoint_name = #{kpointName}
+	</if>
+	<if test="databack != null" >
+	    and databack = #{databack}
+	</if>
+	<if test="updateTime != null" >
+	    and update_time = #{updateTime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduCourseStudyhistory" >
+  insert into edu_course_studyhistory(id,user_id,course_id,kpoint_id,playercount,course_name,kpoint_name,databack,update_time)
+ values(#{id},#{userId},#{courseId},#{kpointId},#{playercount},#{courseName},#{kpointName},#{databack},#{updateTime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduCourseStudyhistory" >
+  update edu_course_studyhistory set id=#{id},user_id=#{userId},course_id=#{courseId},kpoint_id=#{kpointId},playercount=#{playercount},course_name=#{courseName},kpoint_name=#{kpointName},databack=#{databack}update_time=#{updateTime} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduCourseStudyhistory" >
+	update edu_course_studyhistory set 
+	<trim  suffixOverrides="," >
+	<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="courseId != null  ">
+		course_id=#{courseId},
+	</if>
+	<if test="kpointId != null  ">
+		kpoint_id=#{kpointId},
+	</if>
+	<if test="playercount != null  ">
+		playercount=#{playercount},
+	</if>
+	<if test="courseName != null  and courseName != '' ">
+		course_name=#{courseName},
+	</if>
+	<if test="kpointName != null  and kpointName != '' ">
+		kpoint_name=#{kpointName},
+	</if>
+	<if test="databack != null  ">
+		databack=#{databack},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_course_studyhistory where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 课程学习记录 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_course_studyhistory  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_studyhistory 
+</select>
+
+<!-- 课程学习记录 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduCourseStudyhistory">
+	select count(1) from edu_course_studyhistory 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询课程学习记录列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduCourseStudyhistory">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_studyhistory 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

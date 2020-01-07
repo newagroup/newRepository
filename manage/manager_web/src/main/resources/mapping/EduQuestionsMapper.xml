@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduQuestionsDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduQuestions" >
+    	<result column="id" property="id"/>
+    	<result column="cus_id" property="cusId"/>
+    	<result column="title" property="title"/>
+    	<result column="content" property="content"/>
+    	<result column="type" property="type"/>
+    	<result column="status" property="status"/>
+    	<result column="reply_count" property="replyCount"/>
+    	<result column="browse_count" property="browseCount"/>
+    	<result column="praise_count" property="praiseCount"/>
+    	<result column="add_time" property="addTime"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,cus_id,title,content,type,status,reply_count,browse_count,praise_count,add_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="cusId != null" >
+	    and cus_id = #{cusId}
+	</if>
+	<if test="title != null and title != ''" >
+	    and title = #{title}
+	</if>
+	<if test="content != null" >
+	    and content = #{content}
+	</if>
+	<if test="type != null" >
+	    and type = #{type}
+	</if>
+	<if test="status != null" >
+	    and status = #{status}
+	</if>
+	<if test="replyCount != null" >
+	    and reply_count = #{replyCount}
+	</if>
+	<if test="browseCount != null" >
+	    and browse_count = #{browseCount}
+	</if>
+	<if test="praiseCount != null" >
+	    and praise_count = #{praiseCount}
+	</if>
+	<if test="addTime != null" >
+	    and add_time = #{addTime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduQuestions" >
+  insert into edu_questions(id,cus_id,title,content,type,status,reply_count,browse_count,praise_count,add_time)
+ values(#{id},#{cusId},#{title},#{content},#{type},#{status},#{replyCount},#{browseCount},#{praiseCount},#{addTime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduQuestions" >
+  update edu_questions set id=#{id},cus_id=#{cusId},title=#{title},content=#{content},type=#{type},status=#{status},reply_count=#{replyCount},browse_count=#{browseCount},praise_count=#{praiseCount}add_time=#{addTime} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduQuestions" >
+	update edu_questions set 
+	<trim  suffixOverrides="," >
+	<if test="cusId != null  ">
+		cus_id=#{cusId},
+	</if>
+	<if test="title != null  and title != '' ">
+		title=#{title},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="replyCount != null  ">
+		reply_count=#{replyCount},
+	</if>
+	<if test="browseCount != null  ">
+		browse_count=#{browseCount},
+	</if>
+	<if test="praiseCount != null  ">
+		praise_count=#{praiseCount},
+	</if>
+	<if test="addTime != null  ">
+		add_time=#{addTime},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_questions where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 问题 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_questions  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_questions 
+</select>
+
+<!-- 问题 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduQuestions">
+	select count(1) from edu_questions 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询问题列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduQuestions">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_questions 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

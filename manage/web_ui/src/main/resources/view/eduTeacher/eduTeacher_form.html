@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>教师表管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑教师表</h2>
+	<div class="c">
+    	<form id="eduTeacherForm" method="post">
+		
+		<input type="hidden" id="ID" name="ID" value="${ eduTeacher.ID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">教师ID:</td>
+				<td><input  id="id"  name="id"  value="${ eduTeacher.id }" type="text"  ></td>
+			
+				<td class="ftit">教师名称:</td>
+				<td><input  id="name"  name="name"  value="${ eduTeacher.name }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">教师资历,一句话说明老师:</td>
+				<td><input  id="education"  name="education"  value="${ eduTeacher.education }" type="text"  ></td>
+			
+				<td class="ftit">教师简介:</td>
+				<td><input  id="career"  name="career"  value="${ eduTeacher.career }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">头衔 1高级讲师2首席讲师:</td>
+				<td><input  id="isStar"  name="isStar"  value="${ eduTeacher.isStar }" type="text"  ></td>
+			
+				<td class="ftit">图片路径:</td>
+				<td><input  id="picPath"  name="picPath"  value="${ eduTeacher.picPath }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">状态:0正常1删除:</td>
+				<td><input  id="status"  name="status"  value="${ eduTeacher.status }" type="text"  ></td>
+			
+				<td class="ftit">创建时间:</td>
+				<td><input  id="createTime"  name="createTime"  value="${ eduTeacher.createTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">更新时间:</td>
+				<td><input  id="updateTime"  name="updateTime"  value="${ eduTeacher.updateTime }" type="text"  ></td>
+			
+				<td class="ftit">专业ID:</td>
+				<td><input  id="subjectId"  name="subjectId"  value="${ eduTeacher.subjectId }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">排序:</td>
+				<td><input  id="sort"  name="sort"  value="${ eduTeacher.sort }" type="text"  ></td>
+				</tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

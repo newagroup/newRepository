@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电脑统计管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑电脑统计</h2>
+	<div class="c">
+    	<form id="eduStatisticsComputerForm" method="post">
+		
+		<input type="hidden" id="ID" name="ID" value="${ eduStatisticsComputer.ID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">:</td>
+				<td><input  id="id"  name="id"  value="${ eduStatisticsComputer.id }" type="text"  ></td>
+			
+				<td class="ftit">统计日期:</td>
+				<td><input  id="statisticsTime"  name="statisticsTime"  value="${ eduStatisticsComputer.statisticsTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">cpu使用率:</td>
+				<td><input  id="cpuUsage"  name="cpuUsage"  value="${ eduStatisticsComputer.cpuUsage }" type="text"  ></td>
+			
+				<td class="ftit">内存使用率:</td>
+				<td><input  id="memoryUsage"  name="memoryUsage"  value="${ eduStatisticsComputer.memoryUsage }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">网络使用率:</td>
+				<td><input  id="netUsage"  name="netUsage"  value="${ eduStatisticsComputer.netUsage }" type="text"  ></td>
+				</tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.SysLoginLogDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.SysLoginLog" >
+    	<result column="log_id" property="logId"/>
+    	<result column="login_time" property="loginTime"/>
+    	<result column="ip" property="ip"/>
+    	<result column="user_id" property="userId"/>
+    	<result column="os_name" property="osName"/>
+    	<result column="user_agent" property="userAgent"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 log_id,login_time,ip,user_id,os_name,user_agent
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="logId != null" >
+	    and log_id = #{logId}
+	</if>
+	<if test="loginTime != null" >
+	    and login_time = #{loginTime}
+	</if>
+	<if test="ip != null and ip != ''" >
+	    and ip = #{ip}
+	</if>
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="osName != null and osName != ''" >
+	    and os_name = #{osName}
+	</if>
+	<if test="userAgent != null and userAgent != ''" >
+	    and user_agent = #{userAgent}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.SysLoginLog" >
+  insert into sys_login_log(log_id,login_time,ip,user_id,os_name,user_agent)
+ values(#{logId},#{loginTime},#{ip},#{userId},#{osName},#{userAgent})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.SysLoginLog" >
+  update sys_login_log set log_id=#{logId},login_time=#{loginTime},ip=#{ip},user_id=#{userId},os_name=#{osName}user_agent=#{userAgent} where LOG_ID=#{LOGID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.SysLoginLog" >
+	update sys_login_log set 
+	<trim  suffixOverrides="," >
+	<if test="loginTime != null  ">
+		login_time=#{loginTime},
+	</if>
+	<if test="ip != null  and ip != '' ">
+		ip=#{ip},
+	</if>
+	<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="osName != null  and osName != '' ">
+		os_name=#{osName},
+	</if>
+	<if test="userAgent != null  and userAgent != '' ">
+		user_agent=#{userAgent},
+	</if>
+	</trim> where LOG_ID=#{LOGID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from sys_login_log where  LOG_ID =#{LOGID}
+</delete>
+ 
+<!-- 根据id查询  登录日志 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from sys_login_log  where  LOG_ID = #{LOGID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_login_log 
+</select>
+
+<!--  登录日志 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.SysLoginLog">
+	select count(1) from sys_login_log 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询 登录日志列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.SysLoginLog">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_login_log 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

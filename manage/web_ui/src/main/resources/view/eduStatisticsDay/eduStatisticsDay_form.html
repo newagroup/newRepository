@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>天数统计管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑天数统计</h2>
+	<div class="c">
+    	<form id="eduStatisticsDayForm" method="post">
+		
+		<input type="hidden" id="ID" name="ID" value="${ eduStatisticsDay.ID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">:</td>
+				<td><input  id="id"  name="id"  value="${ eduStatisticsDay.id }" type="text"  ></td>
+			
+				<td class="ftit">统计日期:</td>
+				<td><input  id="statisticsTime"  name="statisticsTime"  value="${ eduStatisticsDay.statisticsTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">登录人数（活跃人数 ）:</td>
+				<td><input  id="loginNum"  name="loginNum"  value="${ eduStatisticsDay.loginNum }" type="text"  ></td>
+			
+				<td class="ftit">生成时间:</td>
+				<td><input  id="createTime"  name="createTime"  value="${ eduStatisticsDay.createTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">注册人数:</td>
+				<td><input  id="registeredNum"  name="registeredNum"  value="${ eduStatisticsDay.registeredNum }" type="text"  ></td>
+			
+				<td class="ftit">每日播放视频数:</td>
+				<td><input  id="videoViewingNum"  name="videoViewingNum"  value="${ eduStatisticsDay.videoViewingNum }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">每日用户数:</td>
+				<td><input  id="dailyUserNumber"  name="dailyUserNumber"  value="${ eduStatisticsDay.dailyUserNumber }" type="text"  ></td>
+			
+				<td class="ftit">每日课程数:</td>
+				<td><input  id="dailyCourseNumber"  name="dailyCourseNumber"  value="${ eduStatisticsDay.dailyCourseNumber }" type="text"  ></td>
+			</tr>
+			<tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

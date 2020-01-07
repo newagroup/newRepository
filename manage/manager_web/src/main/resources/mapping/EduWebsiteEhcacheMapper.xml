@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduWebsiteEhcacheDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduWebsiteEhcache" >
+    	<result column="id" property="id"/>
+    	<result column="ehcache_key" property="ehcacheKey"/>
+    	<result column="ehcache_desc" property="ehcacheDesc"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,ehcache_key,ehcache_desc
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="ehcacheKey != null and ehcacheKey != ''" >
+	    and ehcache_key = #{ehcacheKey}
+	</if>
+	<if test="ehcacheDesc != null and ehcacheDesc != ''" >
+	    and ehcache_desc = #{ehcacheDesc}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduWebsiteEhcache" >
+  insert into edu_website_ehcache(id,ehcache_key,ehcache_desc)
+ values(#{id},#{ehcacheKey},#{ehcacheDesc})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduWebsiteEhcache" >
+  update edu_website_ehcache set ehcache_key=#{ehcacheKey},ehcache_desc=#{ehcacheDesc} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduWebsiteEhcache" >
+	update edu_website_ehcache set 
+	<trim  suffixOverrides="," >
+	<if test="ehcacheKey != null  and ehcacheKey != '' ">
+		ehcache_key=#{ehcacheKey},
+	</if>
+	<if test="ehcacheDesc != null  and ehcacheDesc != '' ">
+		ehcache_desc=#{ehcacheDesc},
+	</if>
+	</trim> where id=#{id}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_website_ehcache where  id =#{id}
+</delete>
+ 
+<!-- 根据id查询 纯Java的进程内缓存框架的描述 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_website_ehcache  where  id = #{id}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_ehcache 
+</select>
+
+<!-- 纯Java的进程内缓存框架的描述 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduWebsiteEhcache">
+	select count(1) from edu_website_ehcache 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询纯Java的进程内缓存框架的描述列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduWebsiteEhcache">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_ehcache 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

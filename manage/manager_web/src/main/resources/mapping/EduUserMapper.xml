@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduUserDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduUser" >
+    	<result column="user_id" property="userId"/>
+    	<result column="mobile" property="mobile"/>
+    	<result column="email" property="email"/>
+    	<result column="password" property="password"/>
+    	<result column="user_name" property="userName"/>
+    	<result column="show_name" property="showName"/>
+    	<result column="sex" property="sex"/>
+    	<result column="age" property="age"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="is_avalible" property="isAvalible"/>
+    	<result column="pic_img" property="picImg"/>
+    	<result column="banner_url" property="bannerUrl"/>
+    	<result column="msg_num" property="msgNum"/>
+    	<result column="sys_msg_num" property="sysMsgNum"/>
+    	<result column="last_system_time" property="lastSystemTime"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 user_id,mobile,email,password,user_name,show_name,sex,age,create_time,is_avalible,pic_img,banner_url,msg_num,sys_msg_num,last_system_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="mobile != null and mobile != ''" >
+	    and mobile = #{mobile}
+	</if>
+	<if test="email != null and email != ''" >
+	    and email = #{email}
+	</if>
+	<if test="password != null and password != ''" >
+	    and password = #{password}
+	</if>
+	<if test="userName != null and userName != ''" >
+	    and user_name = #{userName}
+	</if>
+	<if test="showName != null and showName != ''" >
+	    and show_name = #{showName}
+	</if>
+	<if test="sex != null" >
+	    and sex = #{sex}
+	</if>
+	<if test="age != null" >
+	    and age = #{age}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="isAvalible != null" >
+	    and is_avalible = #{isAvalible}
+	</if>
+	<if test="picImg != null and picImg != ''" >
+	    and pic_img = #{picImg}
+	</if>
+	<if test="bannerUrl != null and bannerUrl != ''" >
+	    and banner_url = #{bannerUrl}
+	</if>
+	<if test="msgNum != null" >
+	    and msg_num = #{msgNum}
+	</if>
+	<if test="sysMsgNum != null" >
+	    and sys_msg_num = #{sysMsgNum}
+	</if>
+	<if test="lastSystemTime != null" >
+	    and last_system_time = #{lastSystemTime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduUser" >
+  insert into edu_user(user_id,mobile,email,password,user_name,show_name,sex,age,create_time,is_avalible,pic_img,banner_url,msg_num,sys_msg_num,last_system_time)
+ values(#{userId},#{mobile},#{email},#{password},#{userName},#{showName},#{sex},#{age},#{createTime},#{isAvalible},#{picImg},#{bannerUrl},#{msgNum},#{sysMsgNum},#{lastSystemTime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduUser" >
+  update edu_user set user_id=#{userId},mobile=#{mobile},email=#{email},password=#{password},user_name=#{userName},show_name=#{showName},sex=#{sex},age=#{age},create_time=#{createTime},is_avalible=#{isAvalible},pic_img=#{picImg},banner_url=#{bannerUrl},msg_num=#{msgNum},sys_msg_num=#{sysMsgNum}last_system_time=#{lastSystemTime} where USER_ID=#{USERID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduUser" >
+	update edu_user set 
+	<trim  suffixOverrides="," >
+	<if test="mobile != null  and mobile != '' ">
+		mobile=#{mobile},
+	</if>
+	<if test="email != null  and email != '' ">
+		email=#{email},
+	</if>
+	<if test="password != null  and password != '' ">
+		password=#{password},
+	</if>
+	<if test="userName != null  and userName != '' ">
+		user_name=#{userName},
+	</if>
+	<if test="showName != null  and showName != '' ">
+		show_name=#{showName},
+	</if>
+	<if test="sex != null  ">
+		sex=#{sex},
+	</if>
+	<if test="age != null  ">
+		age=#{age},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="isAvalible != null  ">
+		is_avalible=#{isAvalible},
+	</if>
+	<if test="picImg != null  and picImg != '' ">
+		pic_img=#{picImg},
+	</if>
+	<if test="bannerUrl != null  and bannerUrl != '' ">
+		banner_url=#{bannerUrl},
+	</if>
+	<if test="msgNum != null  ">
+		msg_num=#{msgNum},
+	</if>
+	<if test="sysMsgNum != null  ">
+		sys_msg_num=#{sysMsgNum},
+	</if>
+	<if test="lastSystemTime != null  ">
+		last_system_time=#{lastSystemTime},
+	</if>
+	</trim> where USER_ID=#{USERID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_user where  USER_ID =#{USERID}
+</delete>
+ 
+<!-- 根据id查询 用户表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_user  where  USER_ID = #{USERID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_user 
+</select>
+
+<!-- 用户表 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduUser">
+	select count(1) from edu_user 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询用户表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduUser">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_user 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

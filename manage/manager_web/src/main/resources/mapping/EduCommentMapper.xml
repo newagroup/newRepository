@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduCommentDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduComment" >
+    	<result column="comment_id" property="commentId"/>
+    	<result column="user_id" property="userId"/>
+    	<result column="p_comment_id" property="pCommentId"/>
+    	<result column="content" property="content"/>
+    	<result column="addtime" property="addtime"/>
+    	<result column="other_id" property="otherId"/>
+    	<result column="praise_count" property="praiseCount"/>
+    	<result column="reply_count" property="replyCount"/>
+    	<result column="type" property="type"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 comment_id,user_id,p_comment_id,content,addtime,other_id,praise_count,reply_count,type
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="commentId != null" >
+	    and comment_id = #{commentId}
+	</if>
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="pCommentId != null" >
+	    and p_comment_id = #{pCommentId}
+	</if>
+	<if test="content != null and content != ''" >
+	    and content = #{content}
+	</if>
+	<if test="addtime != null" >
+	    and addtime = #{addtime}
+	</if>
+	<if test="otherId != null" >
+	    and other_id = #{otherId}
+	</if>
+	<if test="praiseCount != null" >
+	    and praise_count = #{praiseCount}
+	</if>
+	<if test="replyCount != null" >
+	    and reply_count = #{replyCount}
+	</if>
+	<if test="type != null" >
+	    and type = #{type}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduComment" >
+  insert into edu_comment(comment_id,user_id,p_comment_id,content,addtime,other_id,praise_count,reply_count,type)
+ values(#{commentId},#{userId},#{pCommentId},#{content},#{addtime},#{otherId},#{praiseCount},#{replyCount},#{type})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduComment" >
+  update edu_comment set comment_id=#{commentId},user_id=#{userId},p_comment_id=#{pCommentId},content=#{content},addtime=#{addtime},other_id=#{otherId},praise_count=#{praiseCount},reply_count=#{replyCount}type=#{type} where COMMENT_ID=#{COMMENTID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduComment" >
+	update edu_comment set 
+	<trim  suffixOverrides="," >
+	<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="pCommentId != null  ">
+		p_comment_id=#{pCommentId},
+	</if>
+	<if test="content != null  and content != '' ">
+		content=#{content},
+	</if>
+	<if test="addtime != null  ">
+		addtime=#{addtime},
+	</if>
+	<if test="otherId != null  ">
+		other_id=#{otherId},
+	</if>
+	<if test="praiseCount != null  ">
+		praise_count=#{praiseCount},
+	</if>
+	<if test="replyCount != null  ">
+		reply_count=#{replyCount},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	</trim> where COMMENT_ID=#{COMMENTID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_comment where  COMMENT_ID =#{COMMENTID}
+</delete>
+ 
+<!-- 根据id查询 文章评论表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_comment  where  COMMENT_ID = #{COMMENTID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_comment 
+</select>
+
+<!-- 文章评论表 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduComment">
+	select count(1) from edu_comment 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询文章评论表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduComment">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_comment 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

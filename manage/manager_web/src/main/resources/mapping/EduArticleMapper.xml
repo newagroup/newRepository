@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduArticleDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduArticle" >
+    	<result column="article_id" property="articleId"/>
+    	<result column="title" property="title"/>
+    	<result column="summary" property="summary"/>
+    	<result column="key_word" property="keyWord"/>
+    	<result column="image_url" property="imageUrl"/>
+    	<result column="source" property="source"/>
+    	<result column="author" property="author"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="publish_time" property="publishTime"/>
+    	<result column="link" property="link"/>
+    	<result column="article_type" property="articleType"/>
+    	<result column="click_num" property="clickNum"/>
+    	<result column="praise_count" property="praiseCount"/>
+    	<result column="comment_num" property="commentNum"/>
+    	<result column="sort" property="sort"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 article_id,title,summary,key_word,image_url,source,author,create_time,publish_time,link,article_type,click_num,praise_count,comment_num,sort
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="articleId != null" >
+	    and article_id = #{articleId}
+	</if>
+	<if test="title != null and title != ''" >
+	    and title = #{title}
+	</if>
+	<if test="summary != null and summary != ''" >
+	    and summary = #{summary}
+	</if>
+	<if test="keyWord != null and keyWord != ''" >
+	    and key_word = #{keyWord}
+	</if>
+	<if test="imageUrl != null and imageUrl != ''" >
+	    and image_url = #{imageUrl}
+	</if>
+	<if test="source != null and source != ''" >
+	    and source = #{source}
+	</if>
+	<if test="author != null and author != ''" >
+	    and author = #{author}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="publishTime != null" >
+	    and publish_time = #{publishTime}
+	</if>
+	<if test="link != null and link != ''" >
+	    and link = #{link}
+	</if>
+	<if test="articleType != null" >
+	    and article_type = #{articleType}
+	</if>
+	<if test="clickNum != null" >
+	    and click_num = #{clickNum}
+	</if>
+	<if test="praiseCount != null" >
+	    and praise_count = #{praiseCount}
+	</if>
+	<if test="commentNum != null" >
+	    and comment_num = #{commentNum}
+	</if>
+	<if test="sort != null" >
+	    and sort = #{sort}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduArticle" >
+  insert into edu_article(article_id,title,summary,key_word,image_url,source,author,create_time,publish_time,link,article_type,click_num,praise_count,comment_num,sort)
+ values(#{articleId},#{title},#{summary},#{keyWord},#{imageUrl},#{source},#{author},#{createTime},#{publishTime},#{link},#{articleType},#{clickNum},#{praiseCount},#{commentNum},#{sort})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduArticle" >
+  update edu_article set article_id=#{articleId},title=#{title},summary=#{summary},key_word=#{keyWord},image_url=#{imageUrl},source=#{source},author=#{author},create_time=#{createTime},publish_time=#{publishTime},link=#{link},article_type=#{articleType},click_num=#{clickNum},praise_count=#{praiseCount},comment_num=#{commentNum}sort=#{sort} where ARTICLE_ID=#{ARTICLEID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduArticle" >
+	update edu_article set 
+	<trim  suffixOverrides="," >
+	<if test="title != null  and title != '' ">
+		title=#{title},
+	</if>
+	<if test="summary != null  and summary != '' ">
+		summary=#{summary},
+	</if>
+	<if test="keyWord != null  and keyWord != '' ">
+		key_word=#{keyWord},
+	</if>
+	<if test="imageUrl != null  and imageUrl != '' ">
+		image_url=#{imageUrl},
+	</if>
+	<if test="source != null  and source != '' ">
+		source=#{source},
+	</if>
+	<if test="author != null  and author != '' ">
+		author=#{author},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="publishTime != null  ">
+		publish_time=#{publishTime},
+	</if>
+	<if test="link != null  and link != '' ">
+		link=#{link},
+	</if>
+	<if test="articleType != null  ">
+		article_type=#{articleType},
+	</if>
+	<if test="clickNum != null  ">
+		click_num=#{clickNum},
+	</if>
+	<if test="praiseCount != null  ">
+		praise_count=#{praiseCount},
+	</if>
+	<if test="commentNum != null  ">
+		comment_num=#{commentNum},
+	</if>
+	<if test="sort != null  ">
+		sort=#{sort},
+	</if>
+	</trim> where ARTICLE_ID=#{ARTICLEID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_article where  ARTICLE_ID =#{ARTICLEID}
+</delete>
+ 
+<!-- 根据id查询 文章表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_article  where  ARTICLE_ID = #{ARTICLEID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_article 
+</select>
+
+<!-- 文章表 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduArticle">
+	select count(1) from edu_article 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询文章表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduArticle">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_article 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

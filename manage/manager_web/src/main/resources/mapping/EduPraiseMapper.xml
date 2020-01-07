@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduPraiseDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduPraise" >
+    	<result column="id" property="id"/>
+    	<result column="user_id" property="userId"/>
+    	<result column="target_id" property="targetId"/>
+    	<result column="type" property="type"/>
+    	<result column="add_time" property="addTime"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,user_id,target_id,type,add_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="targetId != null" >
+	    and target_id = #{targetId}
+	</if>
+	<if test="type != null" >
+	    and type = #{type}
+	</if>
+	<if test="addTime != null" >
+	    and add_time = #{addTime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduPraise" >
+  insert into edu_praise(id,user_id,target_id,type,add_time)
+ values(#{id},#{userId},#{targetId},#{type},#{addTime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduPraise" >
+  update edu_praise set id=#{id},user_id=#{userId},target_id=#{targetId},type=#{type}add_time=#{addTime} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduPraise" >
+	update edu_praise set 
+	<trim  suffixOverrides="," >
+	<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="targetId != null  ">
+		target_id=#{targetId},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="addTime != null  ">
+		add_time=#{addTime},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_praise where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 赞 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_praise  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_praise 
+</select>
+
+<!-- 赞 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduPraise">
+	select count(1) from edu_praise 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询赞列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduPraise">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_praise 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

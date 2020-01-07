@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduCourseNoteDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduCourseNote" >
+    	<result column="id" property="id"/>
+    	<result column="user_id" property="userId"/>
+    	<result column="course_id" property="courseId"/>
+    	<result column="kpoint_id" property="kpointId"/>
+    	<result column="content" property="content"/>
+    	<result column="update_time" property="updateTime"/>
+    	<result column="status" property="status"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,user_id,course_id,kpoint_id,content,update_time,status
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="userId != null" >
+	    and user_id = #{userId}
+	</if>
+	<if test="courseId != null" >
+	    and course_id = #{courseId}
+	</if>
+	<if test="kpointId != null" >
+	    and kpoint_id = #{kpointId}
+	</if>
+	<if test="content != null" >
+	    and content = #{content}
+	</if>
+	<if test="updateTime != null" >
+	    and update_time = #{updateTime}
+	</if>
+	<if test="status != null" >
+	    and status = #{status}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduCourseNote" >
+  insert into edu_course_note(id,user_id,course_id,kpoint_id,content,update_time,status)
+ values(#{id},#{userId},#{courseId},#{kpointId},#{content},#{updateTime},#{status})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduCourseNote" >
+  update edu_course_note set id=#{id},user_id=#{userId},course_id=#{courseId},kpoint_id=#{kpointId},content=#{content},update_time=#{updateTime}status=#{status} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduCourseNote" >
+	update edu_course_note set 
+	<trim  suffixOverrides="," >
+	<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="courseId != null  ">
+		course_id=#{courseId},
+	</if>
+	<if test="kpointId != null  ">
+		kpoint_id=#{kpointId},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_course_note where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 课程笔记 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_course_note  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_note 
+</select>
+
+<!-- 课程笔记 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduCourseNote">
+	select count(1) from edu_course_note 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询课程笔记列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduCourseNote">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_note 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

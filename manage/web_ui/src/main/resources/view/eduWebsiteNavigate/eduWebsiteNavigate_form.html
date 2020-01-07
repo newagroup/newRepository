@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站链接导航管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑网站链接导航</h2>
+	<div class="c">
+    	<form id="eduWebsiteNavigateForm" method="post">
+		
+		<input type="hidden" id="ID" name="ID" value="${ eduWebsiteNavigate.ID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">ID:</td>
+				<td><input  id="id"  name="id"  value="${ eduWebsiteNavigate.id }" type="text"  ></td>
+			
+				<td class="ftit">导航显示名称:</td>
+				<td><input  id="name"  name="name"  value="${ eduWebsiteNavigate.name }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">导航显示位置:</td>
+				<td><input  id="url"  name="url"  value="${ eduWebsiteNavigate.url }" type="text"  ></td>
+			
+				<td class="ftit">是否在新页面打开0是1否:</td>
+				<td><input  id="newpage"  name="newpage"  value="${ eduWebsiteNavigate.newpage }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">类型：INDEX首页、USER个人中心、FRIENDLINK尾部友链、TAB尾部标签:</td>
+				<td><input  id="type"  name="type"  value="${ eduWebsiteNavigate.type }" type="text"  ></td>
+			
+				<td class="ftit">显示排序:</td>
+				<td><input  id="ordernum"  name="ordernum"  value="${ eduWebsiteNavigate.ordernum }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">0正常1冻结:</td>
+				<td><input  id="status"  name="status"  value="${ eduWebsiteNavigate.status }" type="text"  ></td>
+				</tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

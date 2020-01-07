@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>课程学习记录管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑课程学习记录</h2>
+	<div class="c">
+    	<form id="eduCourseStudyhistoryForm" method="post">
+		
+		<input type="hidden" id="ID" name="ID" value="${ eduCourseStudyhistory.ID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">:</td>
+				<td><input  id="id"  name="id"  value="${ eduCourseStudyhistory.id }" type="text"  ></td>
+			
+				<td class="ftit">用户id:</td>
+				<td><input  id="userId"  name="userId"  value="${ eduCourseStudyhistory.userId }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">课程id:</td>
+				<td><input  id="courseId"  name="courseId"  value="${ eduCourseStudyhistory.courseId }" type="text"  ></td>
+			
+				<td class="ftit">节点id:</td>
+				<td><input  id="kpointId"  name="kpointId"  value="${ eduCourseStudyhistory.kpointId }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">观看次数,累加:</td>
+				<td><input  id="playercount"  name="playercount"  value="${ eduCourseStudyhistory.playercount }" type="text"  ></td>
+			
+				<td class="ftit">课程名称:</td>
+				<td><input  id="courseName"  name="courseName"  value="${ eduCourseStudyhistory.courseName }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">节点名称:</td>
+				<td><input  id="kpointName"  name="kpointName"  value="${ eduCourseStudyhistory.kpointName }" type="text"  ></td>
+			
+				<td class="ftit">playercount小于20时记录,备注观看的时间，叠加:</td>
+				<td><input  id="databack"  name="databack"  value="${ eduCourseStudyhistory.databack }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">最后观看时间:</td>
+				<td><input  id="updateTime"  name="updateTime"  value="${ eduCourseStudyhistory.updateTime }" type="text"  ></td>
+				</tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

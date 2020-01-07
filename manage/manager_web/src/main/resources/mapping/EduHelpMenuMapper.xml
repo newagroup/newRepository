@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduHelpMenuDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduHelpMenu" >
+    	<result column="id" property="id"/>
+    	<result column="parentid" property="parentid"/>
+    	<result column="name" property="name"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="content" property="content"/>
+    	<result column="sort" property="sort"/>
+    	<result column="varchar" property="varchar"/>
+    	<result column="link_building" property="linkBuilding"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,parentid,name,create_time,content,sort,varchar,link_building
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="parentid != null" >
+	    and parentid = #{parentid}
+	</if>
+	<if test="name != null and name != ''" >
+	    and name = #{name}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="content != null" >
+	    and content = #{content}
+	</if>
+	<if test="sort != null" >
+	    and sort = #{sort}
+	</if>
+	<if test="varchar != null and varchar != ''" >
+	    and varchar = #{varchar}
+	</if>
+	<if test="linkBuilding != null and linkBuilding != ''" >
+	    and link_building = #{linkBuilding}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduHelpMenu" >
+  insert into edu_help_menu(id,parentid,name,create_time,content,sort,varchar,link_building)
+ values(#{id},#{parentid},#{name},#{createTime},#{content},#{sort},#{varchar},#{linkBuilding})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduHelpMenu" >
+  update edu_help_menu set parentid=#{parentid},name=#{name},create_time=#{createTime},content=#{content},sort=#{sort},varchar=#{varchar},link_building=#{linkBuilding} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduHelpMenu" >
+	update edu_help_menu set 
+	<trim  suffixOverrides="," >
+	<if test="parentid != null  ">
+		parentid=#{parentid},
+	</if>
+	<if test="name != null  and name != '' ">
+		name=#{name},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="sort != null  ">
+		sort=#{sort},
+	</if>
+	<if test="varchar != null  and varchar != '' ">
+		varchar=#{varchar},
+	</if>
+	<if test="linkBuilding != null  and linkBuilding != '' ">
+		link_building=#{linkBuilding},
+	</if>
+	</trim> where id=#{id}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_help_menu where  id =#{id}
+</delete>
+ 
+<!-- 根据id查询 帮助菜单 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_help_menu  where  id = #{id}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_help_menu 
+</select>
+
+<!-- 帮助菜单 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduHelpMenu">
+	select count(1) from edu_help_menu 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询帮助菜单列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduHelpMenu">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_help_menu 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduStatisticsDayDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduStatisticsDay" >
+    	<result column="id" property="id"/>
+    	<result column="statistics_time" property="statisticsTime"/>
+    	<result column="login_num" property="loginNum"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="registered_num" property="registeredNum"/>
+    	<result column="video_viewing_num" property="videoViewingNum"/>
+    	<result column="daily_user_number" property="dailyUserNumber"/>
+    	<result column="daily_course_number" property="dailyCourseNumber"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,statistics_time,login_num,create_time,registered_num,video_viewing_num,daily_user_number,daily_course_number
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="statisticsTime != null" >
+	    and statistics_time = #{statisticsTime}
+	</if>
+	<if test="loginNum != null" >
+	    and login_num = #{loginNum}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="registeredNum != null" >
+	    and registered_num = #{registeredNum}
+	</if>
+	<if test="videoViewingNum != null" >
+	    and video_viewing_num = #{videoViewingNum}
+	</if>
+	<if test="dailyUserNumber != null" >
+	    and daily_user_number = #{dailyUserNumber}
+	</if>
+	<if test="dailyCourseNumber != null" >
+	    and daily_course_number = #{dailyCourseNumber}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduStatisticsDay" >
+  insert into edu_statistics_day(id,statistics_time,login_num,create_time,registered_num,video_viewing_num,daily_user_number,daily_course_number)
+ values(#{id},#{statisticsTime},#{loginNum},#{createTime},#{registeredNum},#{videoViewingNum},#{dailyUserNumber},#{dailyCourseNumber})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduStatisticsDay" >
+  update edu_statistics_day set id=#{id},statistics_time=#{statisticsTime},login_num=#{loginNum},create_time=#{createTime},registered_num=#{registeredNum},video_viewing_num=#{videoViewingNum},daily_user_number=#{dailyUserNumber}daily_course_number=#{dailyCourseNumber} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduStatisticsDay" >
+	update edu_statistics_day set 
+	<trim  suffixOverrides="," >
+	<if test="statisticsTime != null  ">
+		statistics_time=#{statisticsTime},
+	</if>
+	<if test="loginNum != null  ">
+		login_num=#{loginNum},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="registeredNum != null  ">
+		registered_num=#{registeredNum},
+	</if>
+	<if test="videoViewingNum != null  ">
+		video_viewing_num=#{videoViewingNum},
+	</if>
+	<if test="dailyUserNumber != null  ">
+		daily_user_number=#{dailyUserNumber},
+	</if>
+	<if test="dailyCourseNumber != null  ">
+		daily_course_number=#{dailyCourseNumber},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_statistics_day where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 天数统计 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_statistics_day  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_statistics_day 
+</select>
+
+<!-- 天数统计 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduStatisticsDay">
+	select count(1) from edu_statistics_day 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询天数统计列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduStatisticsDay">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_statistics_day 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

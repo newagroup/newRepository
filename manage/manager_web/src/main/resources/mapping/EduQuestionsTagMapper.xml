@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduQuestionsTagDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduQuestionsTag" >
+    	<result column="questions_tag_id" property="questionsTagId"/>
+    	<result column="questions_tag_name" property="questionsTagName"/>
+    	<result column="status" property="status"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="parent_id" property="parentId"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 questions_tag_id,questions_tag_name,status,create_time,parent_id
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="questionsTagId != null" >
+	    and questions_tag_id = #{questionsTagId}
+	</if>
+	<if test="questionsTagName != null and questionsTagName != ''" >
+	    and questions_tag_name = #{questionsTagName}
+	</if>
+	<if test="status != null" >
+	    and status = #{status}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="parentId != null and parentId != ''" >
+	    and parent_id = #{parentId}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduQuestionsTag" >
+  insert into edu_questions_tag(questions_tag_id,questions_tag_name,status,create_time,parent_id)
+ values(#{questionsTagId},#{questionsTagName},#{status},#{createTime},#{parentId})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduQuestionsTag" >
+  update edu_questions_tag set questions_tag_id=#{questionsTagId},questions_tag_name=#{questionsTagName},status=#{status},create_time=#{createTime}parent_id=#{parentId} where QUESTIONS_TAG_ID=#{QUESTIONSTAGID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduQuestionsTag" >
+	update edu_questions_tag set 
+	<trim  suffixOverrides="," >
+	<if test="questionsTagName != null  and questionsTagName != '' ">
+		questions_tag_name=#{questionsTagName},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="parentId != null  and parentId != '' ">
+		parent_id=#{parentId},
+	</if>
+	</trim> where QUESTIONS_TAG_ID=#{QUESTIONSTAGID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_questions_tag where  QUESTIONS_TAG_ID =#{QUESTIONSTAGID}
+</delete>
+ 
+<!-- 根据id查询 问题关于的课程类型 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_questions_tag  where  QUESTIONS_TAG_ID = #{QUESTIONSTAGID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_questions_tag 
+</select>
+
+<!-- 问题关于的课程类型 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduQuestionsTag">
+	select count(1) from edu_questions_tag 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询问题关于的课程类型列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduQuestionsTag">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_questions_tag 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

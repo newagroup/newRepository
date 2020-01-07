@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>帮助菜单管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑帮助菜单</h2>
+	<div class="c">
+    	<form id="eduHelpMenuForm" method="post">
+		
+		<input type="hidden" id="id" name="id" value="${ eduHelpMenu.id }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">:</td>
+				<td><input  id="id"  name="id"  value="${ eduHelpMenu.id }" type="text"  ></td>
+			
+				<td class="ftit">父级分类ID，默认0为一级分类:</td>
+				<td><input  id="parentid"  name="parentid"  value="${ eduHelpMenu.parentid }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">菜单名称:</td>
+				<td><input  id="name"  name="name"  value="${ eduHelpMenu.name }" type="text"  ></td>
+			
+				<td class="ftit">创建时间:</td>
+				<td><input  id="createTime"  name="createTime"  value="${ eduHelpMenu.createTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">菜单内容:</td>
+				<td><input  id="content"  name="content"  value="${ eduHelpMenu.content }" type="text"  ></td>
+			
+				<td class="ftit">排序  倒叙:</td>
+				<td><input  id="sort"  name="sort"  value="${ eduHelpMenu.sort }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">:</td>
+				<td><input  id="varchar"  name="varchar"  value="${ eduHelpMenu.varchar }" type="text"  ></td>
+			
+				<td class="ftit">外链字段:</td>
+				<td><input  id="linkBuilding"  name="linkBuilding"  value="${ eduHelpMenu.linkBuilding }" type="text"  ></td>
+			</tr>
+			<tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

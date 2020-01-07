@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduCourseSubjectDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduCourseSubject" >
+    	<result column="id" property="id"/>
+    	<result column="course_id" property="courseId"/>
+    	<result column="subject_id" property="subjectId"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,course_id,subject_id
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="courseId != null" >
+	    and course_id = #{courseId}
+	</if>
+	<if test="subjectId != null" >
+	    and subject_id = #{subjectId}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduCourseSubject" >
+  insert into edu_course_subject(id,course_id,subject_id)
+ values(#{id},#{courseId},#{subjectId})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduCourseSubject" >
+  update edu_course_subject set id=#{id},course_id=#{courseId}subject_id=#{subjectId} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduCourseSubject" >
+	update edu_course_subject set 
+	<trim  suffixOverrides="," >
+	<if test="courseId != null  ">
+		course_id=#{courseId},
+	</if>
+	<if test="subjectId != null  ">
+		subject_id=#{subjectId},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_course_subject where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 课程与科目中间表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_course_subject  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_subject 
+</select>
+
+<!-- 课程与科目中间表 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduCourseSubject">
+	select count(1) from edu_course_subject 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询课程与科目中间表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduCourseSubject">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course_subject 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

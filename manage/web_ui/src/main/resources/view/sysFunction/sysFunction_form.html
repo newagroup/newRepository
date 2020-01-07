@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>功能管理</title>
+<link href="<%=request.getContextPath()%>/res/sys/css/default.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="blk c">
+	<h2>编辑功能</h2>
+	<div class="c">
+    	<form id="sysFunctionForm" method="post">
+		
+		<input type="hidden" id="FUNCTIONID" name="FUNCTIONID" value="${ sysFunction.FUNCTIONID }" />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pmsTable">
+	        <tr>
+				<td class="ftit">权限ID:</td>
+				<td><input  id="functionId"  name="functionId"  value="${ sysFunction.functionId }" type="text"  ></td>
+			
+				<td class="ftit">权限父ID:</td>
+				<td><input  id="parentId"  name="parentId"  value="${ sysFunction.parentId }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">权限名:</td>
+				<td><input  id="functionName"  name="functionName"  value="${ sysFunction.functionName }" type="text"  ></td>
+			
+				<td class="ftit">权限URL:</td>
+				<td><input  id="functionUrl"  name="functionUrl"  value="${ sysFunction.functionUrl }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">权限类型 1菜单 2功能:</td>
+				<td><input  id="functionType"  name="functionType"  value="${ sysFunction.functionType }" type="text"  ></td>
+			
+				<td class="ftit">创建时间:</td>
+				<td><input  id="createTime"  name="createTime"  value="${ sysFunction.createTime }" type="text"  ></td>
+			</tr>
+			<tr>
+				<td class="ftit">排序:</td>
+				<td><input  id="sort"  name="sort"  value="${ sysFunction.sort }" type="text"  ></td>
+			
+				<td class="ftit">图标路径:</td>
+				<td><input  id="imageUrl"  name="imageUrl"  value="${ sysFunction.imageUrl }" type="text"  ></td>
+			</tr>
+			<tr>
+			<!-- 
+			<span>*</span>
+			class="easyui-validatebox" data-options="required:true"
+			<tr>
+              <td colspan="2" class="fctrl">
+                <input type="submit" value="提交" id="Button1" class="l-button" /> 
+                <input type="button" value="取消" class="l-button" onclick="JP.f_cancel()"/>      
+              </td>
+            </tr>
+			-->
+            
+        </table>
+        </form>
+	</div>
+</div>
+</body>
+</html>

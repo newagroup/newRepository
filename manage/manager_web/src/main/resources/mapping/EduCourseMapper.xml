@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduCourseDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduCourse" >
+    	<result column="course_id" property="courseId"/>
+    	<result column="course_name" property="courseName"/>
+    	<result column="is_avaliable" property="isAvaliable"/>
+    	<result column="subject_id" property="subjectId"/>
+    	<result column="subject_link" property="subjectLink"/>
+    	<result column="add_time" property="addTime"/>
+    	<result column="source_price" property="sourcePrice"/>
+    	<result column="current_price" property="currentPrice"/>
+    	<result column="title" property="title"/>
+    	<result column="context" property="context"/>
+    	<result column="lession_num" property="lessionNum"/>
+    	<result column="logo" property="logo"/>
+    	<result column="update_time" property="updateTime"/>
+    	<result column="page_buycount" property="pageBuycount"/>
+    	<result column="page_viewcount" property="pageViewcount"/>
+    	<result column="end_time" property="endTime"/>
+    	<result column="losetype" property="losetype"/>
+    	<result column="lose_time" property="loseTime"/>
+    	<result column="sequence" property="sequence"/>
+    	<result column="course_gross_income" property="courseGrossIncome"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 course_id,course_name,is_avaliable,subject_id,subject_link,add_time,source_price,current_price,title,context,lession_num,logo,update_time,page_buycount,page_viewcount,end_time,losetype,lose_time,sequence,course_gross_income
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="courseId != null" >
+	    and course_id = #{courseId}
+	</if>
+	<if test="courseName != null and courseName != ''" >
+	    and course_name = #{courseName}
+	</if>
+	<if test="isAvaliable != null" >
+	    and is_avaliable = #{isAvaliable}
+	</if>
+	<if test="subjectId != null" >
+	    and subject_id = #{subjectId}
+	</if>
+	<if test="subjectLink != null and subjectLink != ''" >
+	    and subject_link = #{subjectLink}
+	</if>
+	<if test="addTime != null" >
+	    and add_time = #{addTime}
+	</if>
+	<if test="sourcePrice != null" >
+	    and source_price = #{sourcePrice}
+	</if>
+	<if test="currentPrice != null" >
+	    and current_price = #{currentPrice}
+	</if>
+	<if test="title != null and title != ''" >
+	    and title = #{title}
+	</if>
+	<if test="context != null" >
+	    and context = #{context}
+	</if>
+	<if test="lessionNum != null" >
+	    and lession_num = #{lessionNum}
+	</if>
+	<if test="logo != null and logo != ''" >
+	    and logo = #{logo}
+	</if>
+	<if test="updateTime != null" >
+	    and update_time = #{updateTime}
+	</if>
+	<if test="pageBuycount != null" >
+	    and page_buycount = #{pageBuycount}
+	</if>
+	<if test="pageViewcount != null" >
+	    and page_viewcount = #{pageViewcount}
+	</if>
+	<if test="endTime != null" >
+	    and end_time = #{endTime}
+	</if>
+	<if test="losetype != null" >
+	    and losetype = #{losetype}
+	</if>
+	<if test="loseTime != null and loseTime != ''" >
+	    and lose_time = #{loseTime}
+	</if>
+	<if test="sequence != null" >
+	    and sequence = #{sequence}
+	</if>
+	<if test="courseGrossIncome != null" >
+	    and course_gross_income = #{courseGrossIncome}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduCourse" >
+  insert into edu_course(course_id,course_name,is_avaliable,subject_id,subject_link,add_time,source_price,current_price,title,context,lession_num,logo,update_time,page_buycount,page_viewcount,end_time,losetype,lose_time,sequence,course_gross_income)
+ values(#{courseId},#{courseName},#{isAvaliable},#{subjectId},#{subjectLink},#{addTime},#{sourcePrice},#{currentPrice},#{title},#{context},#{lessionNum},#{logo},#{updateTime},#{pageBuycount},#{pageViewcount},#{endTime},#{losetype},#{loseTime},#{sequence},#{courseGrossIncome})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduCourse" >
+  update edu_course set course_id=#{courseId},course_name=#{courseName},is_avaliable=#{isAvaliable},subject_id=#{subjectId},subject_link=#{subjectLink},add_time=#{addTime},source_price=#{sourcePrice},current_price=#{currentPrice},title=#{title},context=#{context},lession_num=#{lessionNum},logo=#{logo},update_time=#{updateTime},page_buycount=#{pageBuycount},page_viewcount=#{pageViewcount},end_time=#{endTime},losetype=#{losetype},lose_time=#{loseTime},sequence=#{sequence}course_gross_income=#{courseGrossIncome} where COURSE_ID=#{COURSEID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduCourse" >
+	update edu_course set 
+	<trim  suffixOverrides="," >
+	<if test="courseName != null  and courseName != '' ">
+		course_name=#{courseName},
+	</if>
+	<if test="isAvaliable != null  ">
+		is_avaliable=#{isAvaliable},
+	</if>
+	<if test="subjectId != null  ">
+		subject_id=#{subjectId},
+	</if>
+	<if test="subjectLink != null  and subjectLink != '' ">
+		subject_link=#{subjectLink},
+	</if>
+	<if test="addTime != null  ">
+		add_time=#{addTime},
+	</if>
+	<if test="sourcePrice != null  ">
+		source_price=#{sourcePrice},
+	</if>
+	<if test="currentPrice != null  ">
+		current_price=#{currentPrice},
+	</if>
+	<if test="title != null  and title != '' ">
+		title=#{title},
+	</if>
+	<if test="context != null  ">
+		context=#{context},
+	</if>
+	<if test="lessionNum != null  ">
+		lession_num=#{lessionNum},
+	</if>
+	<if test="logo != null  and logo != '' ">
+		logo=#{logo},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="pageBuycount != null  ">
+		page_buycount=#{pageBuycount},
+	</if>
+	<if test="pageViewcount != null  ">
+		page_viewcount=#{pageViewcount},
+	</if>
+	<if test="endTime != null  ">
+		end_time=#{endTime},
+	</if>
+	<if test="losetype != null  ">
+		losetype=#{losetype},
+	</if>
+	<if test="loseTime != null  and loseTime != '' ">
+		lose_time=#{loseTime},
+	</if>
+	<if test="sequence != null  ">
+		sequence=#{sequence},
+	</if>
+	<if test="courseGrossIncome != null  ">
+		course_gross_income=#{courseGrossIncome},
+	</if>
+	</trim> where COURSE_ID=#{COURSEID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_course where  COURSE_ID =#{COURSEID}
+</delete>
+ 
+<!-- 根据id查询 课程表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_course  where  COURSE_ID = #{COURSEID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course 
+</select>
+
+<!-- 课程表 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduCourse">
+	select count(1) from edu_course 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询课程表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduCourse">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_course 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

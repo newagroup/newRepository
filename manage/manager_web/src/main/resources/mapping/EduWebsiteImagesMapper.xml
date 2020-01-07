@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduWebsiteImagesDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduWebsiteImages" >
+    	<result column="image_id" property="imageId"/>
+    	<result column="image_url" property="imageUrl"/>
+    	<result column="link_address" property="linkAddress"/>
+    	<result column="title" property="title"/>
+    	<result column="type_id" property="typeId"/>
+    	<result column="series_number" property="seriesNumber"/>
+    	<result column="preview_url" property="previewUrl"/>
+    	<result column="color" property="color"/>
+    	<result column="describe" property="describe"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 image_id,image_url,link_address,title,type_id,series_number,preview_url,color,describe
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="imageId != null" >
+	    and image_id = #{imageId}
+	</if>
+	<if test="imageUrl != null and imageUrl != ''" >
+	    and image_url = #{imageUrl}
+	</if>
+	<if test="linkAddress != null and linkAddress != ''" >
+	    and link_address = #{linkAddress}
+	</if>
+	<if test="title != null and title != ''" >
+	    and title = #{title}
+	</if>
+	<if test="typeId != null" >
+	    and type_id = #{typeId}
+	</if>
+	<if test="seriesNumber != null" >
+	    and series_number = #{seriesNumber}
+	</if>
+	<if test="previewUrl != null and previewUrl != ''" >
+	    and preview_url = #{previewUrl}
+	</if>
+	<if test="color != null and color != ''" >
+	    and color = #{color}
+	</if>
+	<if test="describe != null and describe != ''" >
+	    and describe = #{describe}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduWebsiteImages" >
+  insert into edu_website_images(image_id,image_url,link_address,title,type_id,series_number,preview_url,color,describe)
+ values(#{imageId},#{imageUrl},#{linkAddress},#{title},#{typeId},#{seriesNumber},#{previewUrl},#{color},#{describe})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduWebsiteImages" >
+  update edu_website_images set image_id=#{imageId},image_url=#{imageUrl},link_address=#{linkAddress},title=#{title},type_id=#{typeId},series_number=#{seriesNumber},preview_url=#{previewUrl},color=#{color}describe=#{describe} where IMAGE_ID=#{IMAGEID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduWebsiteImages" >
+	update edu_website_images set 
+	<trim  suffixOverrides="," >
+	<if test="imageUrl != null  and imageUrl != '' ">
+		image_url=#{imageUrl},
+	</if>
+	<if test="linkAddress != null  and linkAddress != '' ">
+		link_address=#{linkAddress},
+	</if>
+	<if test="title != null  and title != '' ">
+		title=#{title},
+	</if>
+	<if test="typeId != null  ">
+		type_id=#{typeId},
+	</if>
+	<if test="seriesNumber != null  ">
+		series_number=#{seriesNumber},
+	</if>
+	<if test="previewUrl != null  and previewUrl != '' ">
+		preview_url=#{previewUrl},
+	</if>
+	<if test="color != null  and color != '' ">
+		color=#{color},
+	</if>
+	<if test="describe != null  and describe != '' ">
+		describe=#{describe},
+	</if>
+	</trim> where IMAGE_ID=#{IMAGEID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_website_images where  IMAGE_ID =#{IMAGEID}
+</delete>
+ 
+<!-- 根据id查询 网站链接图片 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_website_images  where  IMAGE_ID = #{IMAGEID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_images 
+</select>
+
+<!-- 网站链接图片 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduWebsiteImages">
+	select count(1) from edu_website_images 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询网站链接图片列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduWebsiteImages">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_images 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

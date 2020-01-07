@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.SysFunctionDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.SysFunction" >
+    	<result column="function_id" property="functionId"/>
+    	<result column="parent_id" property="parentId"/>
+    	<result column="function_name" property="functionName"/>
+    	<result column="function_url" property="functionUrl"/>
+    	<result column="function_type" property="functionType"/>
+    	<result column="create_time" property="createTime"/>
+    	<result column="sort" property="sort"/>
+    	<result column="image_url" property="imageUrl"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 function_id,parent_id,function_name,function_url,function_type,create_time,sort,image_url
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="functionId != null" >
+	    and function_id = #{functionId}
+	</if>
+	<if test="parentId != null" >
+	    and parent_id = #{parentId}
+	</if>
+	<if test="functionName != null and functionName != ''" >
+	    and function_name = #{functionName}
+	</if>
+	<if test="functionUrl != null and functionUrl != ''" >
+	    and function_url = #{functionUrl}
+	</if>
+	<if test="functionType != null" >
+	    and function_type = #{functionType}
+	</if>
+	<if test="createTime != null" >
+	    and create_time = #{createTime}
+	</if>
+	<if test="sort != null" >
+	    and sort = #{sort}
+	</if>
+	<if test="imageUrl != null and imageUrl != ''" >
+	    and image_url = #{imageUrl}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.SysFunction" >
+  insert into sys_function(function_id,parent_id,function_name,function_url,function_type,create_time,sort,image_url)
+ values(#{functionId},#{parentId},#{functionName},#{functionUrl},#{functionType},#{createTime},#{sort},#{imageUrl})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.SysFunction" >
+  update sys_function set function_id=#{functionId},parent_id=#{parentId},function_name=#{functionName},function_url=#{functionUrl},function_type=#{functionType},create_time=#{createTime},sort=#{sort}image_url=#{imageUrl} where FUNCTION_ID=#{FUNCTIONID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.SysFunction" >
+	update sys_function set 
+	<trim  suffixOverrides="," >
+	<if test="parentId != null  ">
+		parent_id=#{parentId},
+	</if>
+	<if test="functionName != null  and functionName != '' ">
+		function_name=#{functionName},
+	</if>
+	<if test="functionUrl != null  and functionUrl != '' ">
+		function_url=#{functionUrl},
+	</if>
+	<if test="functionType != null  ">
+		function_type=#{functionType},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="sort != null  ">
+		sort=#{sort},
+	</if>
+	<if test="imageUrl != null  and imageUrl != '' ">
+		image_url=#{imageUrl},
+	</if>
+	</trim> where FUNCTION_ID=#{FUNCTIONID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from sys_function where  FUNCTION_ID =#{FUNCTIONID}
+</delete>
+ 
+<!-- 根据id查询 功能 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from sys_function  where  FUNCTION_ID = #{FUNCTIONID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_function 
+</select>
+
+<!-- 功能 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.SysFunction">
+	select count(1) from sys_function 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询功能列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.SysFunction">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_function 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

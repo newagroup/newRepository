@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduMsgSystemDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduMsgSystem" >
+    	<result column="id" property="id"/>
+    	<result column="add_time" property="addTime"/>
+    	<result column="update_time" property="updateTime"/>
+    	<result column="content" property="content"/>
+    	<result column="status" property="status"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,add_time,update_time,content,status
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="addTime != null" >
+	    and add_time = #{addTime}
+	</if>
+	<if test="updateTime != null" >
+	    and update_time = #{updateTime}
+	</if>
+	<if test="content != null" >
+	    and content = #{content}
+	</if>
+	<if test="status != null" >
+	    and status = #{status}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduMsgSystem" >
+  insert into edu_msg_system(id,add_time,update_time,content,status)
+ values(#{id},#{addTime},#{updateTime},#{content},#{status})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduMsgSystem" >
+  update edu_msg_system set id=#{id},add_time=#{addTime},update_time=#{updateTime},content=#{content}status=#{status} where ID=#{ID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduMsgSystem" >
+	update edu_msg_system set 
+	<trim  suffixOverrides="," >
+	<if test="addTime != null  ">
+		add_time=#{addTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	</trim> where ID=#{ID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_msg_system where  ID =#{ID}
+</delete>
+ 
+<!-- 根据id查询 短信制度 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_msg_system  where  ID = #{ID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_msg_system 
+</select>
+
+<!-- 短信制度 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduMsgSystem">
+	select count(1) from edu_msg_system 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询短信制度列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduMsgSystem">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_msg_system 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   

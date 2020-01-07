@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.project.dao.EduWebsiteImagesTypeDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.project.entity.EduWebsiteImagesType" >
+    	<result column="type_id" property="typeId"/>
+    	<result column="type_name" property="typeName"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 type_id,type_name
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="typeId != null" >
+	    and type_id = #{typeId}
+	</if>
+	<if test="typeName != null and typeName != ''" >
+	    and type_name = #{typeName}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.project.entity.EduWebsiteImagesType" >
+  insert into edu_website_images_type(type_id,type_name)
+ values(#{typeId},#{typeName})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.project.entity.EduWebsiteImagesType" >
+  update edu_website_images_type set type_id=#{typeId}type_name=#{typeName} where TYPE_ID=#{TYPEID}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.project.entity.EduWebsiteImagesType" >
+	update edu_website_images_type set 
+	<trim  suffixOverrides="," >
+	<if test="typeName != null  and typeName != '' ">
+		type_name=#{typeName},
+	</if>
+	</trim> where TYPE_ID=#{TYPEID}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from edu_website_images_type where  TYPE_ID =#{TYPEID}
+</delete>
+ 
+<!-- 根据id查询 网站链接图片类型 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from edu_website_images_type  where  TYPE_ID = #{TYPEID}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_images_type 
+</select>
+
+<!-- 网站链接图片类型 列表总数-->
+<select id="findByCount" resultType="java.lang.Long"  parameterType="com.yzit.project.entity.EduWebsiteImagesType">
+	select count(1) from edu_website_images_type 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询网站链接图片类型列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.project.entity.EduWebsiteImagesType">
+	select 
+	<include refid="Base_Column_List"/>
+	from edu_website_images_type 
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+  	
+</mapper>   
